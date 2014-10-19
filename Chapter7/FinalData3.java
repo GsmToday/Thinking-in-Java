@@ -1,4 +1,4 @@
-/** The protected keyword
+/** The final keyword
  * Composition for code reuse
  * Chapter 7 in Thinking in Java
  * Practice 19
