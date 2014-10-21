@@ -1,7 +1,7 @@
 /**
  * upcasting for polymorphism 
  * Chapter 8 in Thinking in Java
- * Practice 5
+ * Practice 5/17
  * @author GSM
  */
 package polymorphism;
@@ -38,6 +38,10 @@ class Unicycle extends Cycle{
 	public String toString(){
 		return this.name;
 	}
+	
+	public void balance(){
+		Prt.prt("Unicycle balance");
+	}
 }
 
 class Bicycle extends Cycle{
@@ -55,6 +59,10 @@ class Bicycle extends Cycle{
 	
 	public String toString(){
 		return this.name;
+	}
+	
+	public void balance(){
+		Prt.prt("Bicycle balance");
 	}
 }
 
@@ -90,5 +98,9 @@ public class Man2 {
 		travel(u1);
 		travel(b1);
 		travel(t1);
+		//u1.balance();
+		// downcast
+		((Unicycle) u1).balance();
+		((Bicycle) b1).balance();
 	}
 }
