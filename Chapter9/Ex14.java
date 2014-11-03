@@ -2,7 +2,7 @@
  * For interface,
  * interface can inherit interfaces
  * Chapter 9 in Thinking in Java
- * Practice 14
+ * Practice 14/15
  */
 package interface9;
 
@@ -23,11 +23,12 @@ interface derivedInterface extends interface1,interface2,interface3{
 	void defivedF();
 }
 
-class ConcreteClass{
+abstract class ConcreteClass{
 	String s;
 	public ConcreteClass(String s){
 		this.s = s;
 	}
+	abstract void f_con();
 }
 
 class DerivedClass extends ConcreteClass implements derivedInterface{
@@ -42,6 +43,9 @@ class DerivedClass extends ConcreteClass implements derivedInterface{
 	public void g02(){};
 	public void f03(){};
 	public void g03(){};
+	public void f_con(){
+		Prt.prt("abstractclass");
+	};
 }
 
 public class Ex14 {
@@ -64,7 +68,7 @@ public class Ex14 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DerivedClass e = new DerivedClass();
-
+		e.f_con();
 		fun01(e);
 		fun02(e);
 		fun03(e);
