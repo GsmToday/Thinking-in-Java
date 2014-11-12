@@ -1,7 +1,7 @@
 /**
  * Inner class
  * Chapter 10 in Thinking in Java
- * Practice 07
+ * Practice 07/8
  * inner classes have transparent access to their outer class
  * objects, even private fields and methods.
  */
@@ -14,6 +14,7 @@ public class Ex07 {
 	}
 
 	class Inner{
+		private int j = 120;;
 		void method2(int changed){
 			i = changed;
 			method1();
@@ -21,6 +22,7 @@ public class Ex07 {
 	}
 	public void inner(){
 		Inner in =  new Inner();
+		in.j = 47;//外部类可以用内部类private域
 		in.method2(12);
 		System.out.println("i = "+ i);
 	}
