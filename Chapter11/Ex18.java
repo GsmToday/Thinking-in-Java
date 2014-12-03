@@ -2,7 +2,7 @@
  * holding object
  * Chapter 11 in Thinking in Java
  * For Map sort
- * Practice 17
+ * Practice 18
  */
 package holding;
 import java.util.*;
