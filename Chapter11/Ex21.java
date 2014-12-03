@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Ex21 {
 	public static void main(String[] args) {
-		Set<String> words = new TreeSet<String>(new TextFile("UniqueWords.java","\\W+"));
+		Collection<String> words = new ArrayList<String>(new TextFile("UniqueWords.java","\\W+"));
 		System.out.println(words);	
 		Map<String,Integer> map = new HashMap();
 		Iterator<String> it = words.iterator();
