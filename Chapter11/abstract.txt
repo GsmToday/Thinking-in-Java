@@ -1,0 +1,89 @@
+使用泛型generic: 编译器可以检查你放置到容器中对象类型，而且在使用容器中的对象时，可以使用更加清晰的语法。
+				向上转型也可以作用于其他类型一样作用于泛型。
+---
+Collection, List
+ArrayList是动态数组类似的容器。有add，get,size等方法。
+HashMap和HashSet都提供了最快的查找技术。
+在Collection中添加一组元素，使用Collection.addAll()是首选方式。
+
+List： 一种可修改的序列。
+可add （可以直接插入对象，也可以在某个索引插入某个对象）
+可remove （可以根据索引删除，也可根据对象删除）,
+可判断是否包含一个对象contains()
+可查找第i个元素get(i)
+可查找包含的对象索引位置indexOf(object)
+可建立子集subList(startindex, endindex)
+可排序sort(object), 可乱序shuffle(object,rand)
+可拷贝 利用构造函数copy = new ArrayList<Pet>(pets);
+可求交集 retainAll(object)
+可替换 set(index, object)
+可清空对象 clear（）
+可判空 isempty()
+可转换成数组 toArray()
+
+--- 
+LinkedList: 插入和删除时候更加高效。随机访问逊色于ArrayList
+还添加了可以使其用作栈、队列或双端队列的方法。
+方法：
+返回列表第一个元素： getFirst(), element()| peek()
+移出并返回列表头： removeFirst(), remove(), poll()
+插入元素到尾部： addFirst(), add(), addLast()
+---
+Stack 栈
+LinkList具有真正实现栈的所有方法。所以LinkedList也可以做为栈使用。
+方法：
+Stack push == LinkedList addFirst
+Stack peek == LinkedList getFirst
+Stack pop == LinkedList removeFirst 
+---
+Queue 队列
+队列常被当做一种可靠的将对象从程序的某个区域传输到另一个区域的途径。
+LinkList具有真正实现队列的所有方法。所以LinkedList实现了Queue接口。
+队列在并发编程中特别重要，因为它们可以安全地将对象从一个任务传输给另一个任务。
+Queue是接口
+方法
+peek() 不移出的情况返回队头；队空时候返回null
+element()不移出的情况返回队头；队空时候返回NoSuchElementException异常
+remove()移出的情况返回队头;队空时候返回null
+poll()移出的情况返回队头;队空时候返回NoSuchElementException异常
+offer() 将元素插入队尾，或者返回false
+
+---
+Set
+Set最常用的是测试归属性，通常使用HashSet实现快速查找。 利用contains（一个元素）/containsAll(多个元素)
+还有一个功能：能够产生每个元素都唯一的列表（去重）
+TreeSet 对结果排序。将元素存储到了红黑树中
+	字母序/字典序 向TreeSet传入比较器。
+	Set<String> words = new TreeSet<String>(new TextFile("SetOperation.txt","\\W+"));
+	Set<String> words = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+HashSet 散列函数 方便快速查找
+LinkedHashSet 因为查询速度的原因使用了散列，但是也使用了链表来维护元素的插入顺序。
+---
+Map
+将对象映射到其他对象的能力是一种解决编程问题的杀手锏。
+方法
+	put(key,value)
+	get(key)返回value
+	判断 containsKey(key)/containsValue(key)
+遍历 使用map.entryset生成key-value pair的set, 再生成set的迭代器。以此来遍历
+	Set<Map.Entry<Integer, Integer>> mset = new LinkedHashSet<Map.Entry<Integer, Integer>>(m.entrySet());
+	Iterator<Map.Entry<Integer, Integer>> it = mset.iterator();
+HashMap -- 插入顺序并非输出顺序
+LinkedHashMap -- 插入顺序是输出顺序
+--- 
+实现Collection接口就必须实现iterator(),等13个方法。
+这样代价略大，如果程序在不需要Collection其他情况下，这样 继承一个其他的类，并提供创建迭代器的能力就会容易多了。
+
+总结开来：
+1.Collection含有13个抽象方法，如果你的类需要使用Collection序列存放，而你implements Collection，那么你必须实现所有的方法（不管你会不会用到）
+2.当然，AbstractCollection是一个实现了Collection的抽象类，它帮你实现了大部分的方法，你只需要重写size()和iterator()就可以了。
+你可以继承AbstractCollection，但是如果你的类继承了别的类，就无法继承AbstractColletion，这时候就必须implements Collection接口了
+3.还有一个办法是继承原来的类并在内部创建迭代器。
+---
+迭代器iterator：接受对象容器并传递它，从而在每个对象上都执行操作。
+双向迭代器ListIterator 
+	ListIterator 有add方法，可以向list添加对象，而iterator不能。
+	
+for each 语句能用于数组或者其他Iterable.
+大量的类都是Iterable类型，主要包括所有的Collection（except Map）.
+但是数组不是iterable， 如果想作为iterable类型，需要Arrays.asList(数组)转换
