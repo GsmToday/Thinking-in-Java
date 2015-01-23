@@ -1,0 +1,53 @@
+typeinfo_abstract.txt
+之前用户只能在编译期执行面向类型的操作，用RTTI：运行时类型信息使用户可以在程序运行时发现和使用类型信息。
+
+使用情景：如果能知道某个泛化的引用的确切类型，就可以使用最简单的方式去解决它。
+假如将某个特定的几何类型变成某种特殊的颜色。使用RTTI，可以查询某个Shape引用所指向的对象的确切类型，然后选择或者剔除特例。
+
+
+Java 如何让程序员在运行时候识别对象和类的信息？
+1. 传统的RTTI，运行时候识别一个对象的类型。但是：这个类型编译时候必须已知。
+2. 反射机制，允许我们在运行时发现和使用类的信息。
+
+RTTI工作原理：
+Class对象： 1 包含与类有关的信息 2 可创造类的实例 3 Java使用它执行RTTI
+
+获取Class对象引用
+1. 对象.getClass()
+2. class.forName("类名")
+3. 类.class 类字面常量
+
+比如：
+Class c = Class.forName("typeinfo.toys.FancyToy");//获取Class对象引用
+Class up = c.getSuperClass //父类
+obj = up.newInstance；//生成对象
+
+通过允许程序员对Class引用所指向的CLass对象的类型进行限定，使用泛型语法，可以
+1. 让编译器强制执行额外的类型检查。增加代码安全性。
+2. 减少了强制类型转换。
+
+RTTI的形式：
+1 传统的类型转换。由RTTI确保类型转换的正确性，如果执行了一个错误的类型转换，就会抛出一个异常 
+2 代表对象的类型的Class对象。获得运行时信息
+3  instanceof[静态]]告诉我们对象是不是某个特定类型的实例。可以用提问方式使用
+	if (x instance of Dog)
+		((Dog)x).bark();
+   isInstance[动态] : someClassRef.getClass().isInstance(对象)
+
+--
+
+反射：允许更加动态的编程风格。
+RTTI假设的编译时候类型都已知。这样才能通过JVM加载Class。为了JAVa 动态加载网络下载的字节码等等编译时候不知道的类类型，使用反射。
+java.lang.reflect类库和CLass类对反射进行支持。Field,Method,Constructor类。这些类型的对象是JVM运行时创建，表示未知类对应成员。
+
+
+--
+设计模式:
+
+工厂设计模式：所有类都用内部类实现了Factory接口，专门用来生成自己的对象。Factory统一规范一个功能返回一个当前对象。
+
+动态代理设计模式：使用反射机制实现。
+
+--
+空对象：
+有一个NullObject与原有业务实现相同的接口或者继承同一个父类，让客户端调用无感知，避免NullPointerException异常，或者不必if(x != Null)
