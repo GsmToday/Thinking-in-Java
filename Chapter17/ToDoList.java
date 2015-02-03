@@ -10,14 +10,21 @@ public class ToDoList extends PriorityQueue<ToDoList.ToDoItem>{
 			this.secondary = sec;
 			this.item = td;
 		}
+		// 因为类型 E 是自定义的 ToDoItem，为了能够定义优先级 - 排序
+        // 要 implements Comparable， 定义 compareTo
 		public int compareTo(ToDoItem arg){
 			if(this.primary > arg.primary){
 				return +1;
 			}
 			if(this.primary == arg.primary){
-				return 0;
+				if(this.secondary < arg.secondary)
+					return -1;
+				else if(this.secondary > arg.secondary)
+					return 1;
+				else if(this.secondary == arg.secondary )
+					return 0;
 			}
-			else return -1;
+			return -1;
 		}
 		public String toString(){
 			return Character.toString(primary)+" "+this.secondary+" "+item;
